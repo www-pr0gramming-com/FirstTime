@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">firstname</th>
+            <th scope="col">lastname</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for lead in category.a001.all %}
+        <tr>
+            <td> {{ lead.first_name }}</td>
+            <td> {{ lead.last_name }} </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock content %}

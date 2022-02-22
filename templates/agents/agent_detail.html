@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'app2:agent-list' %}">Go back</a>
+<hr />
+
+
+<h1>Agent </h1>
+
+<h2>user: {{ agent.user.username }} </h2>
+<h3>organisation: {{ agent.organisation.user }}</h3>
+
+<hr>
+
+<h4>email: {{ agent.user.email }}</h4>
+<h4>first_name: {{ agent.user.first_name }}</h4>
+<h4>last_name: {{ agent.user.last_name }}</h4>
+
+<a class="btn btn-primary" href="{% url 'app2:agent-update' agent.id %}">Update</a>
+<a class="btn btn-danger" href="{% url 'app2:agent-delete' agent.id %}">Delete</a>
+
+{% endblock content %}

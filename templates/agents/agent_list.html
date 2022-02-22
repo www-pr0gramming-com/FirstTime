@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="h3" href="{% url 'app2:agent-create' %}">Create</a>
+<hr>
+
+<h1>Agents</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">email</td>
+            <th scope="col">username</td>
+            <th scope="col">first_name</td>
+            <th scope="col">last_name</td>
+            <th scope="col">oraginzation</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for i in object_list %}
+
+        <tr>
+            <td><a href="{% url 'app2:agent-detail' i.id %}">{{ i.user.email }}</a></td>
+            <td>{{ i.user.username }}</td>
+            <td>{{ i.user.first_name }}</td>
+            <td>{{ i.user.last_name }}</td>
+            <td>{{ i.organisation }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+{% endblock content %}

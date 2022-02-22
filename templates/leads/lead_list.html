@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if request.user.is_organisor %}
+<a class="h3" href="{% url 'app:lead-create' %}">Create</a>
+<hr>
+{% endif %}
+
+
+<h1>Lead</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">first_name</th>
+            <th scope="col">last_name</th>
+            <th scope="col">age</th>
+            <th scope="col">organisation</th>
+            <th scope="col">agent</th>
+            <th scope="col">category</th>
+            {% comment %} <th scope="col">description</th> {% endcomment %}
+            <th scope="col">date_added</th>
+            <th scope="col">phone_number</th>
+            <th scope="col">email</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for lead in leads %}
+        <tr>
+            <td><a href="{% url 'app:lead-detail' lead.id %}">{{ lead.first_name }}</a></td>
+            <td>{{ lead.last_name }}</td>
+            <td>{{ lead.age }}</td>
+            <td>{{ lead.organisation }}</td>
+            <td>{{ lead.agent }}</td>
+            <td>{{ lead.category }}</td>
+            {% comment %} <td>{{ lead.description }}</td> {% endcomment %}
+            <td>{{ lead.date_added }}</td>
+            <td>{{ lead.phone_number }}</td>
+            <td>{{ lead.email }}</td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
+
+<hr>
+
+<h1>Unassigned Leads</h1>
+
+
+{% if unassigned_leads.exists %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">first_name</th>
+            <th scope="col">last_name</th>
+            <th scope="col">age</th>
+            <th scope="col">organisation</th>
+            <th scope="col">agent</th>
+            <th scope="col">category</th>
+            {% comment %} <th scope="col">description</th> {% endcomment %}
+            <th scope="col">date_added</th>
+            <th scope="col">phone_number</th>
+            <th scope="col">email</th>
+            <th scope="col">Assign</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for lead in unassigned_leads %}
+        <tr>
+            <td><a href="{% url 'app:lead-detail' lead.id %}">{{ lead.first_name }}</a></td>
+            <td>{{ lead.last_name }}</td>
+            <td>{{ lead.age }}</td>
+            <td>{{ lead.organisation }}</td>
+            <td>{{ lead.agent }}</td>
+            <td>{{ lead.category }}</td>
+            {% comment %} <td>{{ lead.description }}</td> {% endcomment %}
+            <td>{{ lead.date_added }}</td>
+            <td>{{ lead.phone_number }}</td>
+            <td>{{ lead.email }}</td>
+            <td><a class="btn btn-primary btn-sm mx-2" href="{% url 'app:lead-assign' lead.id %}">Assign</a></td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
+
+{% else %}
+{% endif %}
+
+
+{% endblock content %}

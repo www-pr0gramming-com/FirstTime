@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">name </th>
+            <th scope="col">count </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>unassigned</td>
+            <td>{{ unassigned_lead_count }}</td>
+        </tr>
+
+        {% for i in category_list %}
+        <tr>
+            <td> <a href="{% url 'app:category-detail' i.id %}">{{ i.name }}</a></td>
+            <td> {{ i.a001.all.count }} </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock content %}

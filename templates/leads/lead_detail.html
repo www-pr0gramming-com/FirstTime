@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'app:lead-list' %}">Go back</a>
+<hr />
+
+<h1>Detail </h1>
+<h2>fisrt name: {{ lead.first_name }} </h2>
+<h3>last name: {{ lead.last_name}}</h3>
+<h4>Age: {{ lead.age }}</h4>
+<h5>description: {{ lead.description }}</h5>
+<h5>date_added: {{ lead.date_added }}</h5>
+<h5>phone_number: {{ lead.phone_number }}</h5>
+<h5>email: {{ lead.email }}</h5>
+
+<hr>
+
+<h5>Agent: {{ lead.agent }}</h5>
+<h5>organisation: {{ lead.organisation }}</h5>
+
+<hr>
+
+{% if lead.category.name %}
+<h5>Category: {{ lead.category.name }}</h5>
+{% else %}
+{% endif %}
+
+
+<a class="btn btn-success" href="{% url 'app:lead-category-update' lead.id %}">Category Update</a>
+<a class="btn btn-primary" href="{% url 'app:lead-update' lead.id %}">Update</a>
+<a class="btn btn-danger" href="{% url 'app:lead-delete' lead.id %}">Delete</a>
+
+{% endblock content %}
