@@ -51,16 +51,7 @@ atlassian-ide-plugin.xml
 
 # Distribution / packaging 
 .Python build/ 
-develop-eggs/ 
-downloads/ 
-eggs/ 
 .eggs/ 
-lib/ 
-lib64/ 
-# parts/ 
-# sdist/ 
-var/ 
-wheels/ 
 *.egg-info/ 
 .installed.cfg 
 *.egg 
