@@ -74,7 +74,6 @@ WSGI_APPLICATION = "main.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if DEBUG == True:
-
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -149,15 +148,15 @@ AUTH_USER_MODEL = "app.User"
 
 # ###############################################################################
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_HOST_USER = "afafafaf@gmail.com"
-# EMAIL_HOST_PASSWORD = "password"
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 
 # DEFAULT_FROM_EMAIL = ""
@@ -193,3 +192,8 @@ if DEBUG == False:
 # gunicorn main.wsgi:application
 # gunicorn
 # psycopg2-binary
+
+
+# python manage.py collectstatic --no-input
+# python manage.py migrate
+# gunicorn --worker-tmp-dir /dev/shm main.wsgi
