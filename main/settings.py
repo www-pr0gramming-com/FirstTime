@@ -5,10 +5,10 @@ import environ
 env = environ.Env(DEBUG=(bool, False))
 
 
-READ_DOT_ENV_FILE = env.bool("READ_DOT_ENV_FILE", default=False)
+# READ_DOT_ENV_FILE = env.bool("READ_DOT_ENV_FILE", default=False)
+# if READ_DOT_ENV_FILE:
 
-if READ_DOT_ENV_FILE:
-    environ.Env.read_env()
+environ.Env.read_env()
 
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
@@ -148,15 +148,15 @@ AUTH_USER_MODEL = "app.User"
 
 # ###############################################################################
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+# EMAIL_HOST = env("EMAIL_HOST")
+# EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
 
 
 # DEFAULT_FROM_EMAIL = ""
