@@ -18,6 +18,7 @@ from django.views.generic import (
     DeleteView,
     UpdateView,
     FormView,
+    View,
 )
 
 from django.urls import reverse
@@ -240,6 +241,24 @@ class LeadCategoryUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse("app:lead-detail", kwargs={"pk": self.get_object().id})
+
+
+from django.http.response import JsonResponse
+
+
+class LeadJsonView(View):
+    def get(self, request, *args, **kwargs):
+        # qs = A001.objects.all()
+        qs = list(A001.objects.all().values("first_name"))
+        # print(qs)
+
+        return JsonResponse(
+            {
+                "a": "test",
+                "b": 35,
+                "qs": qs,
+            }
+        )
 
 
 # CRUD + List - Create, Retrieve, Update, and Delete + List
