@@ -29,6 +29,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from app2.mixins import OrganisorAndLoginRequiredMixin
 
 
+from django.contrib import messages
+
+
 class SignupView(CreateView):
     template_name = "registration/signup.html"
     form_class = CustomUserCreationForm
@@ -108,6 +111,7 @@ class LeadCreateView(OrganisorAndLoginRequiredMixin, CreateView):
             from_email="test@test.com",
             recipient_list=["test2@test2.com"],
         )
+        messages.success(self.request, "message")
         return super(LeadCreateView, self).form_valid(form)
 
 
