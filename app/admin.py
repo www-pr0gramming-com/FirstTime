@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, A001, Agent, UserProfile, Category
+from .models import User, A001, Agent, UserProfile, Category, FollowUp
 
 
 class A001Admin(admin.ModelAdmin):
@@ -19,3 +19,4 @@ admin.site.register(A001, A001Admin)
 admin.site.register(Agent)
 admin.site.register(UserProfile)
 admin.site.register(Category)
+admin.site.register(FollowUp)

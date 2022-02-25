@@ -76,6 +76,24 @@ class A001(models.Model):
         return f"{self.first_name} - {self.last_name}"
 
 
+def handle_upload_follow_ups(instance, filename):
+    return f"lead_followups/lead_{instance.lead.pk}/{filename}"
+
+
+class FollowUp(models.Model):
+    class Meta:
+        verbose_name_plural = "フォローアップ"
+        verbose_name = "フォローアップ"
+
+    lead = models.ForeignKey(A001, related_name="followups", on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    notes = models.TextField(blank=True, null=True)
+    file = models.FileField(null=True, blank=True, upload_to=handle_upload_follow_ups)
+
+    def __str__(self):
+        return f"{self.lead.first_name} {self.lead.last_name}"
+
+
 class Agent(models.Model):
     class Meta:
         verbose_name_plural = "エージェント"
