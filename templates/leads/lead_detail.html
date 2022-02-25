@@ -6,6 +6,15 @@
 <hr />
 
 <h1>Detail </h1>
+
+{% comment %} {{ lead.profile_picture|pprint }} {% endcomment %}
+
+{% if lead.profile_picture %}
+
+<img src="{{ lead.profile_picture.url }}" class="img-thumbnail" alt="...">
+
+{% endif %}
+
 <h2>fisrt name: {{ lead.first_name }} </h2>
 <h3>last name: {{ lead.last_name}}</h3>
 <h4>Age: {{ lead.age }}</h4>
