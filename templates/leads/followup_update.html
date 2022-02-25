@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<a href="{% url 'app:lead-detail' object.lead.id %}">Go back</a>
+<hr />
+
+<h1>Follow up Update</h1>
+
+<form method="POST" action="." enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success my-3">Submit</button>
+    </div>
+</form>
+
+<hr>
+
+<div class="d-grid gap-2">
+    <a href="{% url 'app:lead-followup-delete' object.id %}" class="btn btn-danger my-3">delete</a>
+</div>
+
+
+{% endblock content %}

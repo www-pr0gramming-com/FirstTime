@@ -284,6 +284,47 @@ class FollowUpCreateView(LoginRequiredMixin, CreateView):
         return super(FollowUpCreateView, self).form_valid(form)
 
 
+from .models import FollowUp
+
+
+class FollowUpUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "leads/followup_update.html"
+    form_class = FollowUpModelForm
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = FollowUp.objects.filter(lead__organisation=user.userprofile)
+        else:
+            queryset = FollowUp.objects.filter(
+                lead__organisation=user.agent.organisation
+            )
+            queryset = queryset.filter(lead__agent__user=user)
+        return queryset
+
+    def get_success_url(self):
+        return reverse("app:lead-detail", kwargs={"pk": self.get_object().lead.id})
+
+
+class FollowUpDeleteView(OrganisorAndLoginRequiredMixin, DeleteView):
+    template_name = "leads/followup_delete.html"
+
+    def get_success_url(self):
+        followup = FollowUp.objects.get(id=self.kwargs["pk"])
+        return reverse("app:lead-detail", kwargs={"pk": followup.lead.pk})
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = FollowUp.objects.filter(lead__organisation=user.userprofile)
+        else:
+            queryset = FollowUp.objects.filter(
+                lead__organisation=user.agent.organisation
+            )
+            queryset = queryset.filter(lead__agent__user=user)
+        return queryset
+
+
 # CRUD + List - Create, Retrieve, Update, and Delete + List
 
 # class LandingView(TemplateView):

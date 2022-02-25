@@ -61,6 +61,9 @@
         <a href="{{ followup.file.url }}" download class="h3">{{ followup.file }}</a>
         {% endif %}
 
+        <br>
+
+        <a href="{% url 'app:lead-followup-update' followup.id %}" class="btn btn-success btn-sm mt-4">update</a>
 
         <hr>
 
