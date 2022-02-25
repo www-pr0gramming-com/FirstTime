@@ -33,6 +33,45 @@ from app2.mixins import OrganisorAndLoginRequiredMixin
 from django.contrib import messages
 
 
+import datetime
+
+
+class DashboardView(OrganisorAndLoginRequiredMixin, TemplateView):
+    template_name = "dashboard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+
+        user = self.request.user
+
+        # total leads
+        total_lead_count = A001.objects.filter(organisation=user.userprofile).count()
+
+        # leads last 30 days
+        thirty_days_ago = datetime.date.today() - datetime.timedelta(days=30)
+
+        total_in_past30 = A001.objects.filter(
+            organisation=user.userprofile, date_added__gte=thirty_days_ago
+        ).count()
+
+        # converted leads last 30 days
+        converted_category = Category.objects.get(name="converted")
+        converted_in_past30 = A001.objects.filter(
+            organisation=user.userprofile,
+            category=converted_category,
+            date_added__gte=thirty_days_ago,
+        ).count()
+
+        context.update(
+            {
+                "total_lead_count": total_lead_count,
+                "total_in_past30": total_in_past30,
+                "converted_in_past30": converted_in_past30,
+            }
+        )
+        return context
+
+
 class SignupView(CreateView):
     template_name = "registration/signup.html"
     form_class = CustomUserCreationForm

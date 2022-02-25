@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container px-4 py-5">
+    <h2 class="pb-2 border-bottom">Dashboard</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+
+            <div>
+                <h2>total_lead_count</h2>
+                <h3>{{ total_lead_count }}</h3>
+
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+
+            <div>
+                <h2>total_in_past30</h2>
+                <h3>{{ total_in_past30 }}</h3>
+
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+
+            <div>
+                <h2>converted_in_past30</h2>
+                <h3>{{ converted_in_past30 }}</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

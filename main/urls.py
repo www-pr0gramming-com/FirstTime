@@ -15,7 +15,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 
-from app.views import SignupView
+from app.views import SignupView, DashboardView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -43,6 +43,11 @@ urlpatterns = [
     ),
     # ####################
     path("", TemplateView.as_view(template_name="landing.html")),
+    path(
+        "dashboard/",
+        DashboardView.as_view(),
+        name="dashboard",
+    ),
 ]
 
 
