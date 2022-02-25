@@ -261,6 +261,29 @@ class LeadJsonView(View):
         )
 
 
+from .forms import FollowUpModelForm
+
+
+class FollowUpCreateView(LoginRequiredMixin, CreateView):
+    template_name = "leads/followup_create.html"
+    form_class = FollowUpModelForm
+
+    def get_success_url(self):
+        return reverse("app:lead-detail", kwargs={"pk": self.kwargs["pk"]})
+
+    def get_context_data(self, **kwargs):
+        context = super(FollowUpCreateView, self).get_context_data(**kwargs)
+        context.update({"lead": A001.objects.get(pk=self.kwargs["pk"])})
+        return context
+
+    def form_valid(self, form):
+        lead = A001.objects.get(pk=self.kwargs["pk"])
+        followup = form.save(commit=False)
+        followup.lead = lead
+        followup.save()
+        return super(FollowUpCreateView, self).form_valid(form)
+
+
 # CRUD + List - Create, Retrieve, Update, and Delete + List
 
 # class LandingView(TemplateView):

@@ -40,4 +40,35 @@
 <a class="btn btn-primary" href="{% url 'app:lead-update' lead.id %}">Update</a>
 <a class="btn btn-danger" href="{% url 'app:lead-delete' lead.id %}">Delete</a>
 
+
+<br>
+
+<div class="container p-5">
+
+
+    <h2>Follow UP</h2>
+
+    <a href="{% url 'app:lead-followup-create' lead.id %}" class="btn btn-primary">ADD Follow UP</a>
+
+    <div class="container p-5">
+
+        {% for followup in lead.followups.all %}
+        <h4>
+            {{ followup.notes }}
+        </h4>
+
+        {% if followup.file %}
+        <a href="{{ followup.file.url }}" download class="h3">{{ followup.file }}</a>
+        {% endif %}
+
+
+        <hr>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
 {% endblock content %}
