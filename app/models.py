@@ -1,6 +1,3 @@
-import email
-from pyexpat import model
-from typing import Tuple
 from django.db import models
 
 # from django.contrib.auth import get_user_model
@@ -32,6 +29,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 # class Manager(models.Manager):
 #     def get_queryset(self):
 #         return super().get_queryset()
@@ -43,6 +41,7 @@ class UserProfile(models.Model):
 # class BlankManager(models.Manager):
 #     def get_queryset(self):
 #         return super().get_queryset().filter(category__isnull=True)
+
 
 class A001(models.Model):
     class Meta:
@@ -65,11 +64,12 @@ class A001(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
+    profile_picture = models.ImageField(
+        null=True, blank=True, upload_to="profile_pictures/"
+    )
 
     # objects = Manager()
     # blank_objects = BlankManager()
-
-
     # A001.blank_objects.all()
 
     def __str__(self):

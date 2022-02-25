@@ -9,10 +9,10 @@
 
 <h1>Create</h1>
 
-<form method="POST" action=".">
+<form method="POST" action="." enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
-    <div class="d-grid gap-2">
+    <div class=" d-grid gap-2">
         <button type="submit" class="btn btn-primary my-3">Submit</button>
     </div>
 </form>
